@@ -1,0 +1,9 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t zabhi15/docker-react -f Dockerfile.dev .
+
+script:
+    - docker run zabhi15/docker-react npm run test -- --coverage
