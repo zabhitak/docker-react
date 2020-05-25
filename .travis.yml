@@ -1,23 +1,23 @@
-sudo: required
+dist: xenial
 services:
-    - docker
+  - docker
 
 before_install:
-    - docker build -t zabhi15/docker-react -f Dockerfile.dev .
+  - docker build -t gutku10/docker-react -f Dockerfile.dev .
 
 script:
-    - docker run zabhi15/docker-react npm run test -- --coverage
+  - docker run -e CI=true gutku10/docker-react npm run test
 
-deploy:
-    provider: elasticbeanstalk
-    region: "us-east-2"
-    app: "docker-react"
-    env: "DockerReact-env"
-    bucket_name: "elasticbeanstalk-us-east-2-799795951143"
-    bucket_path: "docker-react"
-    on:
-        branch: master
+# deploy:
+#     provider: elasticbeanstalk
+#     region: "us-east-2"
+#     app: "docker-react"
+#     env: "DockerReact-env"
+#     bucket_name: "elasticbeanstalk-us-east-2-799795951143"
+#     bucket_path: "docker-react"
+#     on:
+#         branch: master
     
-    ACCESS_KEY_ID: $AWS_ACCESS_KEY
-    secret_access_key:
-        secure: "$AWS_SECRET_KEY"
+#     ACCESS_KEY_ID: $AWS_ACCESS_KEY
+#     secret_access_key:
+#         secure: "$AWS_SECRET_KEY"
